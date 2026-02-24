@@ -108,31 +108,32 @@ export const generateThumbnail = async (req: Request, res: Response) => {
 
     console.log("Image generated successfully");
     /* -------- SAVE TEMP FILE -------- */
-    const filename = `thumbnail-${Date.now()}.png`;
-    const imagesDir = path.join(process.cwd(), "images");
-    const filePath = path.join(imagesDir, filename);
 
-    fs.mkdirSync(imagesDir, { recursive: true });
-    fs.writeFileSync(filePath, imageBuffer);
+const base64Image = `data:image/png;base64,${imageBuffer.toString(
+      "base64"
+    )}`;
 
-    /* -------- UPLOAD TO CLOUDINARY -------- */
-    const uploadResult = await cloudinary.uploader.upload(filePath, {
-      resource_type: "image",
+    /* -------- UPLOAD TO CLOUDINARY (NO FILESYSTEM) -------- */
+    const uploadResult = await cloudinary.uploader.upload(base64Image, {
       folder: "thumbnails",
+      resource_type: "image",
     });
 
-    fs.unlinkSync(filePath);
+    console.log("Uploaded to Cloudinary:", uploadResult.secure_url);
 
     /* -------- UPDATE DB -------- */
     thumbnail.image_url = uploadResult.secure_url;
     thumbnail.prompt_used = finalPrompt;
     thumbnail.isGenerating = false;
+
     await thumbnail.save();
 
+    /* -------- RESPONSE -------- */
     res.json({
       message: "Thumbnail generated successfully 🎉",
       thumbnail,
     });
+
   } catch (error: any) {
     console.error(error);
     res.status(503).json({
