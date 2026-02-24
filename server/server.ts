@@ -21,7 +21,7 @@ const app = express();
 
 
 app.use(cors({
-    origin:['http://localhost:5174','http://localhost:3000','https://genetrix-ai-two.vercel.app/generate'],
+    origin:['https://genetrix-ai-two.vercel.app/generate','http://localhost:5174','http://localhost:3000'],
     credentials: true
 }))
 app.use(session({
