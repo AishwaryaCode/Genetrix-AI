@@ -60,7 +60,7 @@ export default function Navbar() {
             <div className={`fixed inset-0 z-100 bg-black/40 backdrop-blur flex flex-col items-center justify-center text-lg gap-8 md:hidden transition-transform duration-400 ${isOpen ? "translate-x-0" : "-translate-x-full"}`}>
                 <Link onClick={() => setIsOpen(false)} to='/'>Home</Link>
                 <Link onClick={() => setIsOpen(false)} to="/generate"> Generate</Link>
-                {isLoggedIn ? <Link onClick={() => setIsOpen(false)} to="/my generation">My Generations</Link> :
+                {isLoggedIn ? <Link onClick={() => setIsOpen(false)} to="/mygenerations">My Generations</Link> :
                     <Link onClick={() => setIsOpen(false)} to="#">About</Link>}
 
                 <Link onClick={() => setIsOpen(false)} to="/#ContactSection">Contact us</Link>
