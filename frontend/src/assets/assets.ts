@@ -288,7 +288,7 @@ export const yt_html = `
                                 <img src="https://i.pravatar.cc/36?4" class="rounded-full h-9 w-9" />
                                 <div>
                                     <h3 class="font-semibold line-clamp-2">%%TITLE%%</h3>
-                                    <p class="text-sm text-gray-400">Neo TY Channel</p>
+                                    <p class="text-sm text-gray-400">YT Channel</p>
                                     <p class="text-sm text-gray-400">2.3M views • 12 days ago</p>
                                 </div>
                             </div>
